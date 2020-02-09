@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+  <title>Frontend Mentor | Intro component with sign up form</title>
+
+</head>
+
+<body>
+  <div class="content-container">
+    <div class="intro">
+      <p class="h1">Learn to code by watching others</p>
+      <p class="intro-content">See how experienced developers solve problems in real-time. Watching scripted tutorials is great,
+        but understanding how developers think is invaluable.</p>
+    </div>
+    <div class="signup-container">
+      <div class="info">
+        <div class="info-message">
+          <strong>Try it free 7 days</strong> then $20/mo. thereafter
+        </div>
+      </div>
+      <div class="form-container">
+        <form id="signup-form" class="signup-form" action="index.html" method="post" onsubmit="return validateInput(this)">
+          <div class="form-row">
+            <input type="text" class="form-input" name="first_name" value="" placeholder="First Name">
+            <span class="error-message" hidden>First Name cannot be empty</span>
+          </div>
+          <div class="form-row">
+            <input type="text" class="form-input" name="last_name" value="" placeholder="Last Name">
+            <span class="error-message" hidden>Last Name cannot be empty</span>
+          </div>
+          <div class="form-row">
+            <input type="email" class="form-input" name="email" value="" placeholder="Email Address">
+            <span class="error-message" hidden>Looks like this is not an email</span>
+          </div>
+          <div class="form-row">
+            <input type="password" class="form-input" name="password" value="" placeholder="Password">
+            <span class="error-message" hidden>Password cannot be empty</span>
+          </div>
+          <div class="form-row">
+            <button type="submit" name="button">Claim your free trial</button>
+          </div>
+        </form>
+        <div class="terms">
+          <span>By clicking the button, you are agreeing to our </span><strong>Terms and Services</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="#">Carl Pernito</a>.
+    </p>
+  </footer>
+</body>
+
+<script type="text/javascript">
+  $(function() {
+    $('.form-input').on('focusin', function() {
+      if ($(this).hasClass('form-input-focus')) return;
+      $(this).addClass('form-input-focus');
+    });
+    $('.form-input').on('focusout', function() {
+      if (!$(this).hasClass('form-input-focus')) return;
+      $(this).removeClass('form-input-focus');
+    });
+  })
+
+  function validateInput(form) {
+    var form_elem = $(form);
+    form_elem.find('input').removeClass('form-input-required').removeClass('form-input-email-required');
+    form_elem.find('.error-message').hide();
+
+    var first_name = form['first_name'].value;
+    if (first_name == '') {
+      var elem = form_elem.find('input[name=first_name]');
+      elem.addClass('form-input-required');
+      elem.closest('.form-row').find('.error-message').show();
+    }
+
+    var last_name = form['last_name'].value;
+    if (last_name == '') {
+      var elem = form_elem.find('input[name=last_name]');
+      elem.addClass('form-input-required');
+      elem.closest('.form-row').find('.error-message').show();
+    }
+
+    var email = form['email'].value;
+    if (email == '') {
+      var elem = form_elem.find('input[name=email]');
+      elem.attr('placeholder', 'email@example/com');
+      elem.addClass('form-input-email-required');
+      elem.closest('.form-row').find('.error-message').show();
+    }
+
+    var password = form['password'].value;
+    if (password == '') {
+      var elem = form_elem.find('input[name=password]');
+      elem.addClass('form-input-required');
+      elem.closest('.form-row').find('.error-message').show();
+    }
+
+    return false;
+  }
+</script>
+
+</html>
